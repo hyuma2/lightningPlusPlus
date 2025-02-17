@@ -1,6 +1,9 @@
 #include <iostream>
+
 using namespace std;
-int main(){
+
+int main()
+{
     //FIXME: Offer 5 options to shoot from
     float rng;
     int position = 0;
@@ -34,7 +37,13 @@ int main(){
             "|    2             |\n" <<
             "|__________________|\n" <<
             "\nEnter a position using numbers 1-5. The lower the number, the closer it is to the hoop: ";
-            cin >> position;
+            if (!(cin >> position))
+            {
+                cout << "Please enter a number between 1 and 5.\n\n";
+                cin.clear();
+                cin.ignore(10000, '\n');
+                continue;
+            }
             if (position > 0 && position <= 5)
             {
                 cout << 
@@ -64,7 +73,7 @@ int main(){
             cout << "\nYour opponent shoots from the spot you chose and ";
             if (success)
             {
-                cout <<"scores.\n\n";
+                cout << "scores.\n\n";
                     //++npcAdvantage;
                     //--advantage;
             }
@@ -88,5 +97,5 @@ int main(){
             }
         }
     }
-    return (0);
+    return 0;
 }
