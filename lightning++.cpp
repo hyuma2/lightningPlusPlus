@@ -15,11 +15,14 @@ int main(){
     srand(time(0));
     cout << "\nWelcome to Lightning. Score two shots in a row before your opponent scores to win! Enter (y) to start: ";
     cin >> cont;
-    if(cont != 'y'){
+    if (cont != 'y')
+    {
         cout << "Thanks for playing!" << endl;
-        } 
-    else{
-        while(advantage <= 2 || npcAdvantage <= 2){
+    } 
+    else
+    {
+        while (advantage <= 2 || npcAdvantage <= 2)
+        {
             cout << 
             "========================================================================================================\n" <<
             " __________________ \n" <<
