@@ -1,25 +1,43 @@
 #include <iostream>
 using namespace std;
 int main(){
-    //FIXME: Offer 5 options to shoot from
     float rng;
-    int position = 0;
+    int position; int advantage = 0; int npcAdvantage = 0; int round = 1; 
     bool success;
     char cont;
-    int advantage = 0;
-    int npcAdvantage = 0;
-    int round = 1;
 
-    //Advantage: When you score, the other person has to score before you score twice to stay in, 
-    //otherwise they lose. If the person before you scores, you have to score before they score agai to stay in.
+    //FIXME: 
+
     srand(time(0));
     cout << "\nWelcome to Lightning. Score two shots in a row before your opponent scores to win! Enter (y) to start: ";
     cin >> cont;
+
+
     if(cont != 'y'){
-        cout << "Thanks for playing!" << endl;
-        } 
+        cout << "Thanks for playing!" << endl; //0 0 
+        }
     else{
-        while(advantage <= 2 || npcAdvantage <= 2){
+        while(abs(advantage - npcAdvantage) <= 2){
+
+
+            //Win Conditions
+            if (advantage - npcAdvantage == 2) //Positioned before "Score" loop so Round is not displayed and NPC does not attempt to score.
+            {
+                cout << "========================================================================================================\n";   
+                cout << "                                   You win! Thanks for playing!\n";
+                cout << "========================================================================================================\n";
+                break;
+            }
+            if (npcAdvantage - advantage == 2)
+            {
+                cout << "========================================================================================================\n";
+                cout << "                              Your opponent wins. Better luck next time!\n";
+                cout << "========================================================================================================\n";
+                break;
+            }
+
+
+            //Start-of-turn Prompt
             cout << 
             "========================================================================================================\n" <<
             " __________________ \n" <<
@@ -32,28 +50,37 @@ int main(){
             "|__________________|\n" <<
             "\nEnter a position using numbers 1-5. The lower the number, the closer it is to the hoop: ";
             cin >> position;
+
+
+
+            //Player's Turn
             if (position > 0 && position <= 5)
             {
                 cout << 
                 "\n========================================================================================================" <<
                 "\nRound " << round << ":\n";
-                rng = rand() % 100;
+                rng = (rand() % 100) + 1; //Number from 1 to 100
                 success = rng <= 100 - position * 10;
                 if (success)
                 {
                     cout << "\nYou scored!\n";
                     ++advantage;
-                    --npcAdvantage;
+                    //--npcAdvantage;
                 } 
                 else
                 {
                     cout << "\nYou missed!\n";
                 }
-                ++round;
             }  
             else
             {
                 cout << "Please enter a number between 1 and 5.\n\n";
+                break; //Temporary fix to Infinite Loop bug
+            }
+
+
+            //Opponent's turn
+            if(abs(advantage - npcAdvantage) == 2){
                 continue;
             }
             rng = rand() % 100;
@@ -62,27 +89,17 @@ int main(){
             if (success)
             {
                 cout <<"scores.\n\n";
-                    //++npcAdvantage;
+                    ++npcAdvantage;
                     //--advantage;
             }
             else
             {
                 cout << "misses.\n\n";
             }
-            if (advantage == 2)
-            {
-                cout << "========================================================================================================\n";
-                cout << "\n                               You win! Thanks for playing!\n";
-                cout << "========================================================================================================\n";
-                break;
-            }
-            if (npcAdvantage == 2)
-            {
-                cout << "========================================================================================================\n";
-                cout << "                         \nYour opponent wins. Better luck next time!\n";
-                cout << "========================================================================================================\n";
-                break;
-            }
+
+
+            cout << "You: " << advantage << " NPC: " << npcAdvantage << endl;
+            ++round;
         }
     }
     return (0);
