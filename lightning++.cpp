@@ -6,19 +6,16 @@ int main(){
     bool success;
     char cont;
 
-    //FIXME: 
 
     srand(time(0));
     cout << "\nWelcome to Lightning. Score two shots in a row before your opponent scores to win! Enter (y) to start: ";
     cin >> cont;
-
 
     if(cont != 'y'){
         cout << "Thanks for playing!" << endl; //0 0 
         }
     else{
         while(abs(advantage - npcAdvantage) <= 2){
-
 
             //Win Conditions
             if (advantage - npcAdvantage == 2) //Positioned before "Score" loop so Round is not displayed and NPC does not attempt to score.
@@ -50,8 +47,6 @@ int main(){
             "|__________________|\n" <<
             "\nEnter a position using numbers 1-5. The lower the number, the closer it is to the hoop: ";
             cin >> position;
-
-
 
             //Player's Turn
             if (position > 0 && position <= 5)
